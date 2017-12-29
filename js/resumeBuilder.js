@@ -2,7 +2,7 @@
       "name": "Amal AL-Qahtani",
       "role": "Web Developer",
       "contacts": {
-
+        "mobile":"9098643219",
           "email": "Amal.m.alqahtani1@gmail.com",
           "github": "Amal-mo",
           "location": "Riyadh, KSA"
@@ -45,34 +45,35 @@
   		{ "name": "Princess Nourah bint Abdulrahman University",
   			"datesAttended": "2014 - 2017",
   			"location": "Princess Nourah bint Abdulrahman University,Riyadh,KSA",
-  			"degree": "B.Sc.Networking & Telecommunication Systems",
+        "degree": "B.E",
+       "major": ["Networking & Telecommunication Systems"],
   			"url": "http://www.pnu.edu.sa/en/Pages/default.aspx"
   		}
   	],
   	"onlineCourses": [
   		{ "school": "Udacity",
   			"title": "Android Basics by Google",
-  			"completed": "oct 2017",
+  			"dates": "oct 2017",
   			"url": "https://sa.udacity.com/course/android-basics-nanodegree-by-google--nd803"
   		},
   		{ "school": "IBM KSA Skills Academy",
   			"title": "Data Scientist 2017",
-  			"completed": "in progress",
+  			"dates": "in progress",
   			"url": "https://www.ibm.com"
   		},
   		{ "school": "Udacity",
   			"title": "Front–End Web Developer Nanodegree",
-  			"completed": "in progress",
+  			"dates": "in progress",
   			"url": "https://sa.udacity.com/course/front-end-web-developer-nanodegree--nd001"
   		},
   		{ "school": "Cisco Networking Academy  ",
   			"title": "Introduction to IoT course ",
-  			"completed": "Nov 2017",
+  			"dates": "Nov 2017",
   			"url": "https://www.netacad.com/ar/"
   		},
   		{ "school": "Udacity",
   			"title": "Web Development",
-  			"completed": "in progress",
+  			"dates": "in progress",
   			"url": "https://classroom.udacity.com/courses/cs253"
   		}
   	]
@@ -85,7 +86,7 @@
       var formattedRole = HTMLheaderRole.replace("%data%",bio.role);
       var biopic = HTMLbioPic.replace("%data%",bio.biopic);
       var welcomeMessage = HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage);
-        /*var mobile = HTMLmobile.replace("%data%",bio.contacts.mobile);*/
+      var mobile = HTMLmobile.replace("%data%",bio.contacts.mobile);
       var email = HTMLemail.replace("%data%",bio.contacts.email);
       var github = HTMLgithub.replace("%data%",bio.contacts.github);
       var locations = HTMLlocation.replace("%data%",bio.contacts.location);
@@ -93,9 +94,9 @@
       $("#header").prepend(formattedName,formattedRole);
       $("#header").append(welcomeMessage,biopic);
 
-      $("#topContacts, #footerContacts").append(email,github,locations);
+      $("#topContacts, #footerContacts").append(mobile,email,github,locations);
 
-      // Add skills to resume
+
       if(bio.skills.length > 0){
           $("#header").append(HTMLskillsStart);
           for(i = 0; i < bio.skills.length; i++){
@@ -147,28 +148,27 @@
   // Display Education section in resume
   education.display = function() {
   	if(education.schools.length > 0 || education.onlineCourses.length > 0) {
-  		for(i in education.schools) {
-  			$("#education").append(HTMLschoolStart);
-
+  		for(var i = 0; i <  education.schools.length; i++) {
   			var formattedSchoolName = HTMLschoolName.replace("%data%", education.schools[i].name).replace("#", education.schools[i].url);
-  			var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
-  			var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[i].datesAttended);
+        var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", education.schools[i].degree);
+    		var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", education.schools[i].major);
+        var formattedSchoolDates = HTMLschoolDates.replace("%data%", education.schools[i].datesAttended);
   			var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", education.schools[i].location);
 
-
+        $("#education").append(HTMLschoolStart);
   			$(".education-entry:last").append(formattedSchoolName + formattedSchoolDegree);
   			$(".education-entry:last").append(formattedSchoolDates);
   			$(".education-entry:last").append(formattedSchoolLocation);
-
+        $(".education-entry:last").append(formattedSchoolMajor);
   		}
 
   		if(education.onlineCourses.length > 0) {
   			$("#education").append(HTMLonlineClasses);
-  			for(i in education.onlineCourses) {
+  		for(var i = 0; i <  education.onlineCourses.length; i++)  {
   				$("#education").append(HTMLschoolStart);
   				var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[i].title).replace("#", education.onlineCourses[i].url);
   				var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[i].school);
-  				var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[i].completed);
+  				var formattedOnlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[i].dates);
   				var formattedOnlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[i].url).replace("#", education.onlineCourses[i].url);
 
   				$(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
